@@ -11,18 +11,19 @@ function getRandomInt(min, max) {
 
 export async function getServerSideProps() {
   console.log("definindo props serverside dinamicamente")
-  const idPost = getRandomInt(1, 4);
-  const hrefPost = `/posts/curso-next/${idPost}`;
+  const hrefPost = `/posts/curso-next/${getRandomInt(1, 4)}`;
+  const incrementalHref = `/posts/incremental/${getRandomInt(1, 1000)}`
 
   return {
       props: {
-          postHref: hrefPost
+          postHref: hrefPost,
+          incrementalHref: incrementalHref
       }
   }
 }
 
 
-export default function HomePage({postHref}) {
+export default function HomePage({postHref, incrementalHref}) {
   return (
     <div>
       <PageTitle>Home</PageTitle>
@@ -38,6 +39,9 @@ export default function HomePage({postHref}) {
       </Link>
       <Link href={postHref}>
         <h3>Ir para um post dinamico aleatorio com getStaticPaths</h3>
+      </Link>
+      <Link href={incrementalHref}>
+        <h3>Ir para um post dinamico aleatorio feito com incremental static generation</h3>
       </Link>
     </div>
   )
