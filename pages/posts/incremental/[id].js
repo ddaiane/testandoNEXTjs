@@ -1,3 +1,5 @@
+const axios = require("axios");
+
 import genericPostScreen from '../../../src/screens/genericPostScreen';
 
 export default genericPostScreen;
@@ -14,9 +16,8 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
     const id = context.params.id;
 
-    const post = await fetch(`https://fakeapi-omariosouto.vercel.app/api/posts/${id}`)
-        .then((res) => res.json());
-
+    let post = await axios.get(`https://fakeapi-omariosouto.vercel.app/api/posts/${id}`);
+    post = post.data;
 
     return {
       props: {
