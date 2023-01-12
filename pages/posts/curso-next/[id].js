@@ -2,18 +2,8 @@ import dados from '../../../src/dados.json';
 import Link from '../../../src/components/Link';
 import Title from '../../../src/components/Title';
 
-export default function GenericPost(props) {
-//mostra na tela os dados de cada post ao acessar a url de cada um
-    return (
-        <>
-        <Title as="h2">{props.title}</Title>
-        <p>{props.content}</p>
-        <Link href="/">
-            Ir para home
-        </Link>
-        </>
-    )
-}
+import genericPostScreen from '../../../src/screens/genericPostScreen';
+export default genericPostScreen;
 
 export async function getStaticPaths() {
     //gera os paths existentes dinamicamente com base nos dados
