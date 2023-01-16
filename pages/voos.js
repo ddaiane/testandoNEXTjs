@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 
 import voosScreen from '../src/screens/voosScreen';
 export default voosScreen;
@@ -20,7 +21,11 @@ export async function getStaticProps(context) {
         }
       };
 
-    let voos = await axios.get(`https://aerodatabox.p.rapidapi.com/flights/airports/icao/SBPA/2023-01-12T12:15/2023-01-12T20:00`, options);
+    const dateFormat = "YYYY[-]MM[-]DD[T]HH[:]mm";
+    const startHour = moment().add(5, 'minutes').format(dateFormat);
+    const endHour = moment().add(11, 'hours').format(dateFormat);
+    
+    let voos = await axios.get(`https://aerodatabox.p.rapidapi.com/flights/airports/icao/SBPA/${startHour}/${endHour}`, options);
     voos = voos.data;
     voos = voos && voos.length > 0 ? voos.reverse() : voos
     return {
